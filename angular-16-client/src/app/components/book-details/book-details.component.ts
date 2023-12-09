@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MovieService } from 'src/app/services/movie.service';
+import { BookService } from 'src/app/services/book.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Movie } from 'src/app/models/movie.model';
+import { Book } from 'src/app/models/book.model';
 
 @Component({
   selector: 'app-book-details',
@@ -11,7 +11,7 @@ import { Movie } from 'src/app/models/movie.model';
 export class BookDetailsComponent {
   @Input() viewMode = false;
 
-  @Input() currentMovie: Movie = {
+  @Input() currentBook: Book = {
     title: '',
     description: '',
     published: false
@@ -20,7 +20,7 @@ export class BookDetailsComponent {
   message = '';
 
   constructor(
-    private movieService: MovieService,
+    private bookService: BookService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
@@ -28,14 +28,14 @@ export class BookDetailsComponent {
   ngOnInit(): void {
     if (!this.viewMode) {
       this.message = '';
-      this.getMovie(this.route.snapshot.params['id']);
+      this.getBook(this.route.snapshot.params['id']);
     }
   }
 
-  getMovie(id: string): void {
-    this.movieService.get(id).subscribe({
+  getBook(id: string): void {
+    this.bookService.get(id).subscribe({
       next: (data) => {
-        this.currentMovie = data;
+        this.currentBook = data;
         console.log(data);
       },
       error: (e) => console.error(e)
@@ -44,17 +44,17 @@ export class BookDetailsComponent {
 
   updatePublished(status: boolean): void {
     const data = {
-      title: this.currentMovie.title,
-      description: this.currentMovie.description,
+      title: this.currentBook.title,
+      description: this.currentBook.description,
       published: status
     };
 
     this.message = '';
 
-    this.movieService.update(this.currentMovie.id, data).subscribe({
+    this.bookService.update(this.currentBook.id, data).subscribe({
       next: (res) => {
         console.log(res);
-        this.currentMovie.published = status;
+        this.currentBook.published = status;
         this.message = res.message
           ? res.message
           : 'The status was updated successfully!';
@@ -66,8 +66,8 @@ export class BookDetailsComponent {
   updateMovie(): void {
     this.message = '';
 
-    this.movieService
-      .update(this.currentMovie.id, this.currentMovie)
+    this.bookService
+      .update(this.currentBook.id, this.currentBook)
       .subscribe({
         next: (res) => {
           console.log(res);
@@ -79,8 +79,8 @@ export class BookDetailsComponent {
       });
   }
 
-  deleteMovie(): void {
-    this.movieService.delete(this.currentMovie.id).subscribe({
+  deleteBook(): void {
+    this.bookService.delete(this.currentBook.id).subscribe({
       next: (res) => {
         console.log(res);
         this.router.navigate(['/movies']);

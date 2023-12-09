@@ -1,28 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { Movie } from 'src/app/models/movie.model';
-import { MovieService } from 'src/app/services/movie.service';
+import { Book } from 'src/app/models/book.model';
+import { BookService } from 'src/app/services/book.service';
 
 @Component({
-  selector: 'app-movies-list',
-  templateUrl: './movies-list.component.html',
-  styleUrls: ['./movies-list.component.css'],
+  selector: 'app-books-list',
+  templateUrl: './books-list.component.html',
+  styleUrls: ['./books-list.component.css'],
 })
-export class MoviesListComponent {
-  movies?: Movie[];
-  currentMovie: Movie = {};
+export class BooksListComponent {
+  books?: Book[];
+  currentBook: Book = {};
   currentIndex = -1;
   title = '';
 
-  constructor(private movieService: MovieService) { }
+  constructor(private bookService: BookService) { }
 
   ngOnInit(): void {
-    this.retrieveMovies();
+    this.retrieveBooks();
   }
 
-  retrieveMovies(): void {
-    this.movieService.getAll().subscribe({
+  retrieveBooks(): void {
+    this.bookService.getAll().subscribe({
       next: (data) => {
-        this.movies = data;
+        this.books = data;
         console.log(data);
       },
       error: (e) => console.error(e)
@@ -30,18 +30,18 @@ export class MoviesListComponent {
   }
 
   refreshList(): void {
-    this.retrieveMovies();
-    this.currentMovie = {};
+    this.retrieveBooks();
+    this.currentBook = {};
     this.currentIndex = -1;
   }
 
-  setActiveMovie(movie: Movie, index: number): void {
-    this.currentMovie = movie;
+  setActiveBook(book: Book, index: number): void {
+    this.currentBook = book;
     this.currentIndex = index;
   }
 
-  removeAllMovies(): void {
-    this.movieService.deleteAll().subscribe({
+  removeAllBook(): void {
+    this.bookService.deleteAll().subscribe({
       next: (res) => {
         console.log(res);
         this.refreshList();
@@ -51,12 +51,12 @@ export class MoviesListComponent {
   }
 
   searchTitle(): void {
-    this.currentMovie = {};
+    this.currentBook = {};
     this.currentIndex = -1;
 
-    this.movieService.findByTitle(this.title).subscribe({
+    this.bookService.findByTitle(this.title).subscribe({
       next: (data) => {
-        this.movies = data;
+        this.books = data;
         console.log(data);
       },
       error: (e) => console.error(e)

@@ -1,29 +1,29 @@
 import { Component } from '@angular/core';
-import { Movie } from 'src/app/models/movie.model';
-import { MovieService } from 'src/app/services/movie.service';
+import { Book } from 'src/app/models/book.model';
+import { BookService } from 'src/app/services/book.service';
 
 @Component({
-  selector: 'app-add-movie',
-  templateUrl: './add-movie.component.html',
-  styleUrls: ['./add-movie.component.css'],
+  selector: 'app-add-book',
+  templateUrl: './add-book.component.html',
+  styleUrls: ['./add-book.component.css'],
 })
-export class AddMovieComponent {
-  movie: Movie = {
+export class AddBookComponent {
+  book: Book = {
     title: '',
     description: '',
     published: false
   };
   submitted = false;
 
-  constructor(private MovieService: MovieService) { }
+  constructor(private bookService: BookService) { }
 
-  saveMovie(): void {
+  saveBook(): void {
     const data = {
-      title: this.movie.title,
-      description: this.movie.description
+      title: this.book.title,
+      description: this.book.description
     };
 
-    this.MovieService.create(data).subscribe({
+    this.bookService.create(data).subscribe({
       next: (res) => {
         console.log(res);
         this.submitted = true;
@@ -32,9 +32,9 @@ export class AddMovieComponent {
     });
   }
 
-  newMovie(): void {
+  newBook(): void {
     this.submitted = false;
-    this.movie = {
+    this.book = {
       title: '',
       description: '',
       published: false
