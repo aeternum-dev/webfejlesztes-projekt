@@ -15,7 +15,7 @@ export class AddMovieComponent {
   };
   submitted = false;
 
-  constructor(private MovieService: MovieService) { }
+  constructor(private movieService: MovieService) { }
 
   saveMovie(): void {
     const data = {
@@ -23,7 +23,7 @@ export class AddMovieComponent {
       description: this.movie.description
     };
 
-    this.MovieService.create(data).subscribe({
+    this.movieService.create(data).subscribe({
       next: (res) => {
         console.log(res);
         this.submitted = true;

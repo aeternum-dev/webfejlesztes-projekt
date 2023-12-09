@@ -40,7 +40,7 @@ export class BooksListComponent {
     this.currentIndex = index;
   }
 
-  removeAllBook(): void {
+  removeAllBooks(): void {
     this.bookService.deleteAll().subscribe({
       next: (res) => {
         console.log(res);

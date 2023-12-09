@@ -4,7 +4,7 @@ import { MoviesListComponent } from './components/movies-list/movies-list.compon
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 import { AddMovieComponent } from './components/add-movie/add-movie.component';
 import { BooksListComponent } from './components/books-list/books-list.component';
-import { BookDetailsComponent } fr
+import { BookDetailsComponent } from './components/book-details/book-details.component';
 import { AddBookComponent } from './components/add-book/add-book.component';
 
 

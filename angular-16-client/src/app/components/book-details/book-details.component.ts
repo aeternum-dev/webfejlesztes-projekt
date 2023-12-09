@@ -63,7 +63,7 @@ export class BookDetailsComponent {
     });
   }
 
-  updateMovie(): void {
+  updateBook(): void {
     this.message = '';
 
     this.bookService
@@ -73,7 +73,7 @@ export class BookDetailsComponent {
           console.log(res);
           this.message = res.message
             ? res.message
-            : 'This movie was updated successfully!';
+            : 'This book was updated successfully!';
         },
         error: (e) => console.error(e)
       });
@@ -83,7 +83,7 @@ export class BookDetailsComponent {
     this.bookService.delete(this.currentBook.id).subscribe({
       next: (res) => {
         console.log(res);
-        this.router.navigate(['/movies']);
+        this.router.navigate(['/books']);
       },
       error: (e) => console.error(e)
     });

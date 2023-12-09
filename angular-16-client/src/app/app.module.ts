@@ -9,12 +9,21 @@ import { AddMovieComponent } from './components/add-movie/add-movie.component';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 import { MoviesListComponent } from './components/movies-list/movies-list.component';
 
+import { AddBookComponent } from './components/add-book/add-book.component';
+import { BookDetailsComponent } from './components/book-details/book-details.component';
+import { BooksListComponent } from './components/books-list/books-list.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     AddMovieComponent,
     MovieDetailsComponent,
-    MoviesListComponent
+    MoviesListComponent,
+    AddBookComponent,
+    BookDetailsComponent,
+    BooksListComponent
+
   ],
   imports: [
     BrowserModule,
