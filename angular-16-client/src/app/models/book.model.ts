@@ -3,4 +3,5 @@ export class Book {
     title?: string;
     description?: string;
     published?: boolean;
+    //movieAdaptations: any;
 }

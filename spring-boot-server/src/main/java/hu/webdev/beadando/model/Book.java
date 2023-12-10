@@ -1,6 +1,12 @@
 package hu.webdev.beadando.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "books")
@@ -10,7 +16,6 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "title")
     private String title;
 
     @Column(name = "description")
@@ -18,6 +23,14 @@ public class Book {
 
     @Column(name = "published")
     private boolean published;
+
+
+    @ManyToMany
+    @JoinTable(
+            name = "adaptation_structure",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "movie_id"))
+    private Set<Movie> movieAdaptations = new HashSet<>();
 
     public Book() {
 
@@ -55,6 +68,14 @@ public class Book {
 
     public void setPublished(boolean isPublished) {
         this.published = isPublished;
+    }
+
+    public Set<Movie> getMovieAdaptations() {
+        return movieAdaptations;
+    }
+
+    public void setMovieAdaptations(Set<Movie> movieAdaptations) {
+        this.movieAdaptations = movieAdaptations;
     }
 
     @Override
